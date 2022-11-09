@@ -1,6 +1,6 @@
 import json
 
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
@@ -66,11 +66,14 @@ class CategoryDetailView(DetailView):
     model = Categories
 
     def get(self, request, *args, **kwargs):
-        category = self.get_object()
-        return JsonResponse({
-            'id': category.id,
-            'name': category.name,
-        })
+        try:
+            category = self.get_object()
+            return JsonResponse({
+                'id': category.id,
+                'name': category.name,
+            })
+        except Http404:
+            return JsonResponse({'error': 'Ох, нет объекта:/'}, status=404)
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -115,13 +118,17 @@ class AdDetailView(DetailView):
     model = Ads
 
     def get(self, request, *args, **kwargs):
-        ad = self.get_object()
-        return JsonResponse({
-            'id': ad.id,
-            'name': ad.name,
-            'author': ad.author,
-            'price': ad.price,
-            'description': ad.description,
-            'address': ad.address,
-            'is_published': ad.is_published
-        })
+        try:
+            ad = self.get_object()
+            return JsonResponse({
+                'id': ad.id,
+                'name': ad.name,
+                'author': ad.author,
+                'price': ad.price,
+                'description': ad.description,
+                'address': ad.address,
+                'is_published': ad.is_published
+            })
+        except Http404:
+            return JsonResponse({'error': 'Ох, нет объекта:/'}, status=404)
+
