@@ -1,6 +1,5 @@
 import csv
 import json
-from ads import models
 
 
 def csv_to_json(csvfilepath, jsonfilepath):
