@@ -3,8 +3,8 @@
 ![SQlite](https://img.shields.io/badge/-SQlite-05122A?style=flat&logo=SQlite)
 
 
-## *SPICE HARVESTER*
-Приложение, прогнозирующее будущую котировку валюты
+
+## Приложение, для работы с объявлениями
 
 
 ### Для запуска приложения:
